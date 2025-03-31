@@ -1,9 +1,7 @@
 
 from functools import partial
-import numpy as np
 from librosa.filters import mel as librosa_mel_fn
 import jax.numpy as jnp
-import jax
 import audax.core.functional
 def dynamic_range_compression_jax(x, C=1, clip_val=1e-7):
     return jnp.log(jnp.clip(x,min=clip_val) * C)
