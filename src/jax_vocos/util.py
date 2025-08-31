@@ -1,6 +1,5 @@
 
 from functools import partial
-from librosa.filters import mel as librosa_mel_fn
 import jax.numpy as jnp
 import audax.core.functional
 def dynamic_range_compression_jax(x, C=1, clip_val=1e-7):
@@ -8,7 +7,6 @@ def dynamic_range_compression_jax(x, C=1, clip_val=1e-7):
 
 def get_mel(y, n_mels=100,n_fft=1024,win_size=1024,hop_length=256,fmin=0,fmax=None,clip_val=1e-7,sampling_rate=24000):
 
-    mel_basis = librosa_mel_fn(sr=sampling_rate, n_fft=n_fft, n_mels=n_mels, fmin=fmin, fmax=fmax)
     pad_left = (win_size - hop_length) //2
     pad_right = max((win_size - hop_length + 1) //2, win_size - y.shape[-1] - pad_left)
     y = jnp.pad(y, ((0,0),(pad_left, pad_right)))

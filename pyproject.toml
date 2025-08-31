@@ -11,7 +11,7 @@ authors = [
   { name="flyingblackshark", email="aliu2000@outlook.com" },
 ]
 dependencies = [
-    "jax>=0.2.16",
+    "jax",
     "flax",
     "torch",
     "audax"

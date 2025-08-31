@@ -1,8 +1,6 @@
-from typing import Any, Optional
 import jax
 import jax.numpy as jnp
 import flax.linen as nn
-import flax
 
 class ISTFT(nn.Module):
     """
@@ -331,22 +329,22 @@ class Vocos(nn.Module):
         audio_output = ISTFTHead()(x)
         return audio_output
 
-if __name__ == "__main__":
-    import librosa
-    import numpy as np
-    from jax_vocos.util import get_mel
-    import soundfile as sf
-    from convert import convert_torch_weights
-    model = Vocos()
-    wav,sr = librosa.load("./test.wav",sr=24000)
-    wav = wav[np.newaxis,:]
-    mel = get_mel(wav)
-    #mel = mel.transpose(0,2,1)
-    #params = model.init(jax.random.PRNGKey(0),mel)
-    #flatten_param = flax.traverse_util.flatten_dict(params,sep='.')
+# if __name__ == "__main__":
+#     import librosa
+#     import numpy as np
+#     from jax_vocos.util import get_mel
+#     import soundfile as sf
+#     from convert import convert_torch_weights
+#     model = Vocos()
+#     wav,sr = librosa.load("./test.wav",sr=24000)
+#     wav = wav[np.newaxis,:]
+#     mel = get_mel(wav)
+#     #mel = mel.transpose(0,2,1)
+#     #params = model.init(jax.random.PRNGKey(0),mel)
+#     #flatten_param = flax.traverse_util.flatten_dict(params,sep='.')
 
-    params = convert_torch_weights()
-    rng = {'params': jax.random.PRNGKey(0), 'dropout': jax.random.PRNGKey(0)}
-    res = model.apply({"params":params},mel,rngs=rng)
-    sf.write("output.wav",res[0],samplerate=24000)
-    print()
+#     params = convert_torch_weights()
+#     rng = {'params': jax.random.PRNGKey(0), 'dropout': jax.random.PRNGKey(0)}
+#     res = model.apply({"params":params},mel,rngs=rng)
+#     sf.write("output.wav",res[0],samplerate=24000)
+#     print()
