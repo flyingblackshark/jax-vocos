@@ -4,3 +4,4 @@ test.wav
 __pycache__
 jax_vocos.egg-info
 dist
+build/

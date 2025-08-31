@@ -14,7 +14,8 @@ dependencies = [
     "jax",
     "flax",
     "torch",
-    "audax"
+    "audax",
+    "requests"
 ]
 dynamic = ["version"]
 description = "JAX Implementation Vocos"
